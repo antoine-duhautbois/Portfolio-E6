@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossier E4/E6 BTS SIO | [Ton Nom]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #0f172a;
+            --slate: #64748b;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --border: #e2e8f0;
+            --code-font: 'JetBrains Mono', monospace;
+            --success-bg: #dcfce7;
+            --success-text: #166534;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--secondary);
+            line-height: 1.5;
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        a { text-decoration: none; color: inherit; transition: 0.2s; }
+
+        /* --- NAV --- */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 1000; padding: 1rem 0;
+        }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 800; font-size: 1.25rem; display: flex; align-items: center; gap: 10px; }
+        .logo-icon { background: var(--primary); color: white; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 6px; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* --- HERO --- */
+        .hero { padding: 80px 0; background: var(--surface); border-bottom: 1px solid var(--border); }
+        .badge { background: #dbeafe; color: var(--primary); padding: 6px 12px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; }
+        h1 { font-size: 3rem; letter-spacing: -0.03em; margin: 20px 0; line-height: 1.1; }
+        .btn { padding: 12px 24px; border-radius: 6px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .btn-outline { border: 1px solid var(--border); background: white; }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* --- SECTION DOCUMENTS (NEW) --- */
+        .docs-section {
+            background: var(--secondary);
+            color: white;
+            padding: 40px 0;
+            margin-top: -1px; /* Colle au hero */
+        }
+        .docs-grid { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .doc-item { display: flex; align-items: center; gap: 15px; }
+        .doc-icon { font-size: 2rem; color: #60a5fa; }
+        .doc-btn { 
+            background: #3b82f6; color: white; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 0.9rem;
+        }
+        .doc-btn:hover { background: #60a5fa; }
+
+        /* --- PROJETS --- */
+        .section { padding: 80px 0; }
+        .section-title h2 { font-size: 2rem; margin-bottom: 40px; display: flex; align-items: center; gap: 10px; }
+        .section-title h2::before { content: ''; width: 6px; height: 24px; background: var(--primary); border-radius: 2px; display: block; }
+        
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1); }
+        
+        .card-header { padding: 20px; border-bottom: 1px solid var(--border); background: #f8fafc; display: flex; justify-content: space-between; align-items: center; }
+        .card-body { padding: 25px; flex: 1; }
+        
+        /* Skills Box (NEW) */
+        .skills-box {
+            background: #f1f5f9;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 3px solid var(--primary);
+        }
+        .skills-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--slate); margin-bottom: 8px; letter-spacing: 0.5px; }
+        .skills-list { list-style: none; }
+        .skills-list li { font-size: 0.85rem; color: var(--secondary); margin-bottom: 4px; display: flex; align-items: start; gap: 8px; }
+        .skills-list li::before { content: "✓"; color: var(--primary); font-weight: bold; }
+
+        .card-links { padding: 20px 25px; border-top: 1px solid var(--border); background: #fff; display: flex; gap: 15px; }
+        .link-item { font-size: 0.9rem; font-weight: 600; color: var(--primary); display: flex; align-items: center; gap: 6px; }
+
+        /* --- FOOTER --- */
+        footer { border-top: 1px solid var(--border); padding: 40px 0; background: var(--surface); text-align: center; color: var(--slate); font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .hero, .section { text-align: left; }
+            .docs-grid { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-network-wired"></i></div>
+                TonNom.
+            </div>
+            <div class="nav-links">
+                <a href="#projets">Projets E4</a>
+                <a href="#documents">Documents</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <span class="badge">Session 2025</span>
+            <h1>Dossier Professionnel <br> BTS SIO - Option SISR</h1>
+            <p style="color: #64748b; max-width: 600px; margin-bottom: 30px;">
+                Ce portfolio regroupe l'ensemble des éléments requis pour les épreuves E4 (Situations Professionnelles) et E6 (Parcours de Professionnalisation).
+            </p>
+            <div class="btn-group">
+                <a href="#projets" class="btn btn-primary">Explorer les Situations Pro</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="documents" class="docs-section">
+        <div class="container docs-grid">
+            <div class="doc-item">
+                <i class="fas fa-file-pdf doc-icon"></i>
+                <div>
+                    <h3 style="font-size: 1.1rem; font-weight: 700;">Tableau de Synthèse</h3>
+                    <p style="font-size: 0.85rem; opacity: 0.8;">Annexe 6-1 • Obligatoire E4</p>
+                </div>
+            </div>
+            <a href="chemin/vers/ton_tableau_synthese.pdf" target="_blank" class="doc-btn">
+                <i class="fas fa-download"></i> Télécharger le PDF
+            </a>
+            
+            <div style="width: 1px; height: 40px; background: rgba(255,255,255,0.2); display: none;"></div> <div class="doc-item">
+                <i class="fas fa-id-card doc-icon"></i>
+                <div>
+                    <h3 style="font-size: 1.1rem; font-weight: 700;">Passeport de Compétences</h3>
+                    <p style="font-size: 0.85rem; opacity: 0.8;">Récapitulatif E6</p>
+                </div>
+            </div>
+             <a href="chemin/vers/ton_passeport.pdf" target="_blank" class="doc-btn" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+                <i class="fas fa-download"></i> Télécharger
+            </a>
+        </div>
+    </section>
+
+    <section id="projets" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Situations Professionnelles (E4)</h2>
+            </div>
+            
+            <div class="projects-grid">
+                
+                <div class="project-card">
+                    <div class="card-header">
+                        <span style="font-weight: 700; color: var(--secondary);">PROJET 1</span>
+                        <span class="badge" style="background: #f1f5f9; color: var(--slate);">INFRASTRUCTURE</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Migration & Administration AD</h3>
+                        <p style="font-size: 0.9rem; color: var(--slate); margin-bottom: 15px;">
+                            Déploiement d'un contrôleur de domaine Windows Server 2022 et automatisation de la création des comptes utilisateurs.
+                        </p>
+                        
+                        <div class="skills-box">
+                            <div class="skills-title">Compétences Validées (SISR)</div>
+                            <ul class="skills-list">
+                                <li>Gérer le patrimoine informatique (Bloc 1)</li>
+                                <li>Mettre à disposition des services (Bloc 1)</li>
+                                <li>Administrer les éléments d'infrastructure (Bloc 2)</li>
+                                <li>Automatiser les tâches d'administration (Bloc 2)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-links">
+                        <a href="#" class="link-item"><i class="fas fa-file-alt"></i> Fiche Descriptive</a>
+                        <a href="#" class="link-item"><i class="fas fa-images"></i> Preuves</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="card-header">
+                        <span style="font-weight: 700; color: var(--secondary);">PROJET 2</span>
+                        <span class="badge" style="background: #f1f5f9; color: var(--slate);">RÉSEAU</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Segmentation VLAN & Routage</h3>
+                        <p style="font-size: 0.9rem; color: var(--slate); margin-bottom: 15px;">
+                            Refonte de l'architecture réseau LAN pour isoler les flux administratifs, pédagogiques et VoIP.
+                        </p>
+                        
+                        <div class="skills-box">
+                            <div class="skills-title">Compétences Validées (SISR)</div>
+                            <ul class="skills-list">
+                                <li>Concevoir une solution d'infrastructure (Bloc 2)</li>
+                                <li>Configurer les éléments actifs (Switch/Routeur)</li>
+                                <li>Assurer la qualité de service (QoS)</li>
+                                <li>Maintenir la continuité de service</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-links">
+                        <a href="#" class="link-item"><i class="fas fa-file-alt"></i> Fiche Descriptive</a>
+                        <a href="#" class="link-item"><i class="fas fa-project-diagram"></i> Topologie</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="card-header">
+                        <span style="font-weight: 700; color: var(--secondary);">PROJET 3</span>
+                        <span class="badge" style="background: #f1f5f9; color: var(--slate);">CYBERSÉCURITÉ</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Sécurisation Périmétrique & VPN</h3>
+                        <p style="font-size: 0.9rem; color: var(--slate); margin-bottom: 15px;">
+                            Installation d'un pare-feu Pfsense, configuration du filtrage (ACL) et mise en place d'un accès distant sécurisé.
+                        </p>
+                        
+                        <div class="skills-box">
+                            <div class="skills-title">Compétences Validées (SISR)</div>
+                            <ul class="skills-list">
+                                <li>Protéger les données et l'identité (Bloc 3)</li>
+                                <li>Sécuriser les équipements et les usages (Bloc 3)</li>
+                                <li>Gérer les incidents de sécurité (Bloc 3)</li>
+                                <li>Superviser l'état de sécurité du SI</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-links">
+                        <a href="#" class="link-item"><i class="fas fa-file-alt"></i> Fiche Descriptive</a>
+                        <a href="#" class="link-item"><i class="fas fa-shield-alt"></i> Rapport Audit</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 - Portfolio Examen BTS SIO SISR</p>
+        </div>
+    </footer>
+
+</body>
+</html>
