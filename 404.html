@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERREUR 404 | Système Interrompu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg: #030712;
+            --accent: #3b82f6;
+            --text-main: #f8fafc;
+            --text-dim: #64748b;
+            --danger: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+        }
+
+        /* --- LAYOUT SPLIT --- */
+        .split-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- GAUCHE : LE PERSONNAGE (IMMENSE) --- */
+        .character-side {
+            flex: 1.2;
+            position: relative;
+            background: radial-gradient(circle at 60% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .character-img {
+            height: 90vh; /* Prend presque toute la hauteur */
+            width: auto;
+            max-width: 90%;
+            object-fit: contain;
+            /* Filtre pro pour l'intégrer au fond sombre */
+            filter: drop-shadow(0 0 50px rgba(0, 0, 0, 0.8));
+            user-select: none;
+            pointer-events: none;
+        }
+
+        /* --- DROITE : LE CONTENU --- */
+        .content-side {
+            flex: 0.8;
+            padding: 10% 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.4) 0%, transparent 100%);
+        }
+
+        /* Filigrane technique en fond */
+        .content-side::before {
+            content: "404";
+            position: absolute;
+            font-size: 25rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.02);
+            right: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .status-tag {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--danger);
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-tag .blink {
+            width: 8px;
+            height: 8px;
+            background: var(--danger);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 5vw, 5rem);
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        h1 span {
+            color: var(--accent);
+        }
+
+        .description {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 500px;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        /* --- TERMINAL DISCRET --- */
+        .mini-terminal {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 3rem;
+            max-width: 500px;
+        }
+
+        .mini-terminal span { color: var(--accent); }
+
+        /* --- BOUTON CTA --- */
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background: var(--text-main);
+            color: var(--bg);
+            padding: 1.2rem 3rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: fit-content;
+        }
+
+        .btn-action:hover {
+            transform: scale(1.05) translateX(10px);
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .split-container { flex-direction: column; }
+            .character-side { flex: 1; height: 50vh; border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+            .character-img { height: 40vh; }
+            .content-side { flex: 1; text-align: center; align-items: center; padding: 3rem 1.5rem; }
+            .description { margin-inline: auto; }
+            .mini-terminal { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="split-container">
+        <section class="character-side">
+            <img src="unnamed.jpg" alt="Critical Error Character" class="character-img">
+        </section>
+
+        <section class="content-side">
+            <div class="status-tag">
+                <div class="blink"></div> SYSTEM_TIMEOUT : ERR_404
+            </div>
+
+            <h1>Liaison <span>interrompue.</span></h1>
+            
+            <p class="description">
+                Le serveur a rencontré une anomalie lors du routage vers cette adresse. 
+                Même notre assistant réseau semble avoir perdu espoir.
+            </p>
+
+            <div class="mini-terminal">
+                <div><span>$</span> systemctl status route.service</div>
+                <div style="color: #ef4444;">● State: FAILED_NOT_FOUND</div>
+                <div><span>$</span> traceroute --target: Antoine.D</div>
+                <div>[!] Packet dropped at gateway 10.0.4.4</div>
+            </div>
+
+            <a href="index.html" class="btn-action">
+                Rétablir la connexion <i class="fas fa-arrow-right"></i>
+            </a>
+        </section>
+    </main>
+
+</body>
+</html>
