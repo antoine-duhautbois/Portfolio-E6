@@ -52,7 +52,7 @@
         .btn-cv { background: white; border: 2px solid var(--accent); color: var(--accent); }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
-        /* --- LE NOUVEAU VISUALISEUR DE CV (MODALE) --- */
+        /* --- VISUALISEUR DE CV (MODALE) --- */
         .cv-modal {
             display: none;
             position: fixed;
@@ -78,7 +78,6 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        /* Barre d'outils du visualiseur */
         .cv-toolbar {
             background: #ffffff;
             padding: 1rem 1.5rem;
@@ -90,27 +89,42 @@
 
         .cv-title { font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 10px; }
         .cv-actions { display: flex; gap: 10px; }
-
         .btn-close-cv { background: #f1f5f9; color: var(--primary); width: 35px; height: 35px; border-radius: 50%; border: none; cursor: pointer; font-weight: bold; transition: 0.3s; }
         .btn-close-cv:hover { background: #ef4444; color: white; }
-
         .btn-download-cv { background: var(--accent); color: white; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: 0.3s; }
-        .btn-download-cv:hover { background: #2563eb; }
-
-        .cv-frame-container { flex-grow: 1; background: #525659; } /* Fond gris comme les lecteurs PDF */
+        .cv-frame-container { flex-grow: 1; background: #525659; }
         iframe { width: 100%; height: 100%; border: none; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* --- SECTIONS --- */
         .section { padding: 4rem 8%; max-width: 1400px; margin: 0 auto; }
-        .mission-card { background: white; border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem; }
-        .fdv-section { background: var(--fdv-gradient); border-radius: 32px; padding: 4rem; color: white; display: grid; grid-template-columns: 1fr 0.8fr; gap: 4rem; align-items: center; }
+        .section-title { font-size: 2rem; font-weight: 800; margin-bottom: 2rem; display: flex; align-items: center; gap: 15px; }
 
-        footer { background: #0b1120; color: #94a3b8; padding: 4rem 8%; text-align: center; }
+        .mission-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .mission-card { background: white; border: 1px solid var(--border); border-radius: 20px; padding: 2rem; transition: 0.3s; }
+        .mission-card:hover { border-color: var(--accent); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.05); }
+        .mission-card i { font-size: 1.5rem; color: var(--accent); margin-bottom: 1.2rem; display: block; }
+        .mission-card ul { list-style: none; margin-top: 1rem; }
+        .mission-card li { font-size: 0.85rem; color: var(--secondary); margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .mission-card li::before { content: "→"; color: var(--accent); }
+
+        /* --- VEILLE --- */
+        .veille-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        .veille-box { background: #fff; padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border); }
+        .veille-box h4 { margin-bottom: 1rem; color: var(--primary); }
+        .tag-container { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag { background: #f1f5f9; padding: 4px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; color: var(--secondary); }
+
+        /* --- PROJET FLEUR DE VIE --- */
+        .fdv-section { background: var(--fdv-gradient); border-radius: 32px; padding: 4rem; color: white; display: grid; grid-template-columns: 1fr 0.8fr; gap: 4rem; align-items: center; margin-top: 4rem; }
+        .tech-list { display: flex; gap: 15px; margin: 20px 0; }
+        .tech-item { background: rgba(255,255,255,0.15); padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; }
+
+        footer { background: #0b1120; color: #94a3b8; padding: 4rem 8%; text-align: center; margin-top: 6rem; }
 
         @media (max-width: 968px) {
-            .hero, .fdv-section { grid-template-columns: 1fr; }
+            .hero, .fdv-section, .veille-grid { grid-template-columns: 1fr; }
             .cv-wrapper { width: 95%; height: 85vh; margin: 5vh auto; }
         }
     </style>
@@ -142,52 +156,109 @@
         <div class="nav-links">
             <a href="#parcours">Parcours</a>
             <a href="#missions">Missions E5</a>
-            <a href="#fleurdevie">Fleur De Vie</a>
+            <a href="#veille">Veille</a>
+            <a href="#fleurdevie">Projet Web</a>
         </div>
     </nav>
 
     <header id="parcours" class="hero">
         <div>
             <div class="badge">BTS SIO SISR • 19 ANS</div>
-            <h1>Antoine Duhautbois, futur <span style="color: var(--accent);">Architecte Réseaux.</span></h1>
-            <p>Spécialisé dans l'infrastructure système et les solutions Open Source. Découvrez mon parcours et mes projets réalisés en entreprise.</p>
+            <h1>Antoine Duhautbois, futur <span style="color: var(--accent);">Admin Systèmes & Réseaux.</span></h1>
+            <p>Étudiant à <strong>CaenSup Sainte-Ursule</strong>, passionné par Linux, Docker et la sécurité. Mon objectif : concevoir et maintenir des infrastructures robustes et sécurisées.</p>
             
             <div class="hero-btns">
-                <a href="#missions" class="btn btn-primary">Voir mes projets</a>
-                
+                <a href="#missions" class="btn btn-primary">Explorer mes projets</a>
                 <button id="openCV" class="btn btn-cv">
-                    <i class="far fa-eye"></i> Visualiser mon CV
+                    <i class="far fa-eye"></i> Mon CV
                 </button>
             </div>
         </div>
         
         <div style="background: white; padding: 2.5rem; border-radius: 24px; border: 1px solid var(--border);">
-            <h3 style="margin-bottom: 1.5rem;">Dernière Expérience</h3>
-            <div style="border-left: 2px solid var(--accent); padding-left: 20px;">
-                <h4 style="color: var(--accent);">Stagiaire Serenitux</h4>
-                <p style="font-size: 0.9rem; color: var(--secondary);">Maintenance de solutions en logiciels libres à Quettehou.</p>
+            <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-briefcase" style="color: var(--accent);"></i> Stage chez Serenitux</h3>
+            <div style="border-left: 3px solid var(--accent); padding-left: 20px;">
+                <p style="font-size: 0.95rem; color: var(--primary); font-weight: 600;">Quettehou (Manche)</p>
+                <p style="font-size: 0.9rem; color: var(--secondary); margin-top: 5px;">Conseil et maintenance de solutions informatiques basées sur les <strong>Logiciels Libres</strong>.</p>
             </div>
         </div>
     </header>
 
     <section id="missions" class="section">
-        <div class="mission-card">
-            <h2 style="margin-bottom: 1rem;"><i class="fas fa-network-wired"></i> Segmentation Réseau</h2>
-            <p>Mise en place de VLANs sur matériel Cisco pour isoler les flux Engineering et Marketing au sein de l'entreprise.</p>
+        <h2 class="section-title"><i class="fas fa-terminal"></i> Missions Techniques (Épreuve E5)</h2>
+        <div class="mission-grid">
+            <div class="mission-card">
+                <i class="fas fa-server"></i>
+                <h3>Virtualisation Proxmox</h3>
+                <p>Installation d'un hyperviseur pour la centralisation des services.</p>
+                <ul>
+                    <li>Optimisation des ressources</li>
+                    <li>Haute disponibilité</li>
+                </ul>
+            </div>
+
+            <div class="mission-card">
+                <i class="fas fa-network-wired"></i>
+                <h3>Segmentation VLANs</h3>
+                <p>Isolation des flux réseaux (Engineering, Marketing, Accounting).</p>
+                <ul>
+                    <li>Sécurité renforcée</li>
+                    <li>Optimisation du trafic</li>
+                </ul>
+            </div>
+
+            <div class="mission-card">
+                <i class="fas fa-tools"></i>
+                <h3>Gestion avec GLPI</h3>
+                <p>Mise en service pour la gestion de parc et le support utilisateurs.</p>
+                <ul>
+                    <li>Centralisation des tickets</li>
+                    <li>Inventaire automatisé</li>
+                </ul>
+            </div>
         </div>
-        <div class="mission-card">
-            <h2 style="margin-bottom: 1rem;"><i class="fas fa-server"></i> Virtualisation Proxmox</h2>
-            <p>Installation et configuration d'un cluster d'hyperviseurs pour optimiser la disponibilité des services critiques.</p>
+    </section>
+
+    <section id="veille" class="section" style="background: #f1f5f9; border-radius: 40px;">
+        <h2 class="section-title"><i class="fas fa-eye"></i> Veille Technologique & Juridique</h2>
+        <p>Afin de rester à jour sur les évolutions du secteur, je consulte régulièrement des sources spécialisées.</p>
+        
+        <div class="veille-grid">
+            <div class="veille-box">
+                <h4><i class="fas fa-microchip"></i> Technologie</h4>
+                <div class="tag-container">
+                    <span class="tag">01net</span>
+                    <span class="tag">Clubic</span>
+                    <span class="tag">Innovations Réseau</span>
+                    <span class="tag">Logiciels</span>
+                </div>
+            </div>
+            <div class="veille-box">
+                <h4><i class="fas fa-gavel"></i> Juridique</h4>
+                <div class="tag-container">
+                    <span class="tag">Legifrance</span>
+                    <span class="tag">CNIL (RGPD)</span>
+                    <span class="tag">Code du numérique</span>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="fleurdevie" class="section">
         <div class="fdv-section">
             <div>
-                <span style="font-weight: 800; opacity: 0.8;">PROJET WEB</span>
+                <span style="font-weight: 800; opacity: 0.8; text-transform: uppercase; font-size: 0.8rem;">Projet Personnel Académique</span>
                 <h2 style="font-size: 3rem; margin: 10px 0;">Fleur De Vie</h2>
-                <p style="font-style: italic; margin-bottom: 20px;">"Votre bien-être commence par une conversation."</p>
-                <a href="https://fleurde-vie.fr/" target="_blank" style="background: white; color: #4f46e5; padding: 1rem 2rem; border-radius: 12px; text-decoration: none; font-weight: 800; display: inline-block;">Accéder au site</a>
+                <p style="font-style: italic; margin-bottom: 10px; opacity: 0.9;">"Votre bien-être commence par une conversation."</p>
+                <p style="margin-bottom: 20px; font-size: 0.95rem;">Site vitrine pour une micro-entreprise intégrant un système de prise de contact et de planning.</p>
+                
+                <div class="tech-list">
+                    <span class="tech-item">HTML/CSS</span>
+                    <span class="tech-item">JS</span>
+                    <span class="tech-item">API Google Calendar</span>
+                </div>
+
+                <a href="https://fleurde-vie.fr/" target="_blank" style="background: white; color: #4f46e5; padding: 1rem 2rem; border-radius: 12px; text-decoration: none; font-weight: 800; display: inline-block;">Découvrir le projet</a>
             </div>
             <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 20px;">
                 <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800" alt="Bien être" style="width: 100%; border-radius: 12px;">
@@ -196,7 +267,7 @@
     </section>
 
     <footer>
-        <p>© 2024 Antoine Duhautbois - Portfolio SISR</p>
+        <p>© 2024 Antoine Duhautbois - Portfolio SISR | Objectif : Administrateur Systèmes & Réseaux</p>
     </footer>
 
     <script>
@@ -204,25 +275,9 @@
         const btnOpen = document.getElementById("openCV");
         const btnClose = document.getElementById("closeCV");
 
-        // Ouvrir le visualiseur
-        btnOpen.onclick = function() {
-            modal.style.display = "block";
-            document.body.style.overflow = "hidden"; // Bloque le scroll
-        }
-
-        // Fermer le visualiseur
-        btnClose.onclick = function() {
-            modal.style.display = "none";
-            document.body.style.overflow = "auto"; // Réactive le scroll
-        }
-
-        // Fermer si clic en dehors du CV
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-                document.body.style.overflow = "auto";
-            }
-        }
+        btnOpen.onclick = () => { modal.style.display = "block"; document.body.style.overflow = "hidden"; }
+        btnClose.onclick = () => { modal.style.display = "none"; document.body.style.overflow = "auto"; }
+        window.onclick = (e) => { if (e.target == modal) { modal.style.display = "none"; document.body.style.overflow = "auto"; } }
     </script>
 
 </body>
